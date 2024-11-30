@@ -15,15 +15,17 @@ io.on('connection', (socket) => {
     console.log('User connected:', socket.id);
   
     // Join a room based on a unique identifier (e.g., roomId)
-    socket.on('join-room', (roomId) => {
-      socket.join(roomId);
-      console.log(`User ${socket.id} joined room ${roomId}`);
+    socket.on('join-room', ({roomID, username}) => {
+      socket.join(roomID);
+      console.log(`User ${username} joined room ${roomID}`);
     });
   
     // Handle private messages
-    socket.on('private-message', ({ roomId, message, username }) => {
+    socket.on('private-message', ({ roomID, message, username }) => {
       // Emit the message to only the room
-      io.to(roomId).emit('private-message', { message, username });
+      console.log(`${username} said ${message} in ${roomID}`);
+      
+      io.to(roomID).emit('private-message', { message, username });
     });
   
     socket.on('disconnect', () => {
