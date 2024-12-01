@@ -1,15 +1,8 @@
 import { useEffect, useState } from 'react';
-// import { io } from 'socket.io-client';
-
-// const socket = io('http://localhost:3000');
 
 const ChatBox = ({username, roomID, socket}) => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
-    console.log(messages);
-    
-
-
 
     useEffect(() => {
         // Listen for private messages
