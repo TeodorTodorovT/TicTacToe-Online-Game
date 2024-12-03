@@ -4,7 +4,7 @@ import ChatBox from './components/ChatBox';
 import TicTacToeBoard from './components/TicTacToeBoard';
 import JoinGame from './components/JoinGame';
 
-const socket = io('http://localhost:3000');
+const socket = io('http://192.168.1.3:3000');
 
 function App() {
     const [username, setUsername] = useState('');

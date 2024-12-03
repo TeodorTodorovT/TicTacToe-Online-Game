@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const TicTacToeBoard = ({ socket }) => {
     const [board, setBoard] = useState(Array(9).fill(null));
@@ -7,10 +7,16 @@ const TicTacToeBoard = ({ socket }) => {
     const [playerTurn, setPlayerTurn] = useState(false);
     const [winner, setWinner] = useState(null);
 
-    // console.log(`Board: ${board}`);
-    // console.log(`Player symbol: ${playerSymbol}`);
-    // console.log(`Is it players turn: ${playerTurn}`);
-    // console.log(`Did player win: ${winner}`);
+        // Use ref to hold the latest value of playerSymbol
+        const playerSymbolRef = useRef();
+
+        // Update the ref whenever playerSymbol changes
+        useEffect(() => {
+            playerSymbolRef.current = playerSymbol;
+        }, [playerSymbol]);
+
+    console.log(playerSymbol);
+    
 
     useEffect(() => {
         socket.on('player-state', ({ symbol, turn }) => {
@@ -19,18 +25,13 @@ const TicTacToeBoard = ({ socket }) => {
         });
 
         socket.on('player-move', ({ updatedBoard, result, nextTurn }) => {
-            console.log(nextTurn);
-            console.log(playerSymbol);
+            console.log(`${nextTurn} - ${playerSymbolRef.current}`);
 
             setBoard(updatedBoard);
             if (result !== null) {
                 setWinner(result);
             }
-            if (nextTurn === playerSymbol) {
-                setPlayerTurn(true);
-            } else {
-                setPlayerTurn(false);
-            }
+            setPlayerTurn(nextTurn === playerSymbolRef.current);
         });
 
         return () => {
@@ -42,8 +43,8 @@ const TicTacToeBoard = ({ socket }) => {
     const handleCellClick = (index) => {
         const isMoveLegal = board[index] === null;
 
-        if (playerTurn && isMoveLegal) {
-            socket.emit('player-move', { board, index });
+        if (playerTurn && isMoveLegal && winner === null) {
+            socket.emit('player-move', { board, index, playerSymbol });
         }
     };
     return (
