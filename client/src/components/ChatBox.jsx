@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { GameContext } from '../contexts/GameContext';
 
-const ChatBox = ({username, roomID, socket}) => {
+const ChatBox = () => {
+    const { username, roomID, socket } = useContext(GameContext);
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
         // Listen for private messages
-        socket.on('private-message', ({message, username }) => {
+        socket.on('private-message', ({ message, username }) => {
             setMessages((prev) => [...prev, `${username}: ${message}`]);
         });
 
@@ -15,16 +17,13 @@ const ChatBox = ({username, roomID, socket}) => {
         };
     }, []);
 
-
     const sendMessage = () => {
         if (message.trim() && username && roomID) {
-            
-            socket.emit('private-message', {roomID, message, username});
+            socket.emit('private-message', { roomID, message, username });
             setMessage(''); // Clear the input
         }
     };
 
-   
     return (
         <>
             <div className="bg-gray-100 border border-gray-300 rounded-md p-4 h-48 overflow-y-auto">

@@ -1,7 +1,16 @@
 /* eslint-disable react/prop-types */
+import { useContext } from 'react';
+import { GameContext } from '../contexts/GameContext';
 
-const JoinGame = ({roomID, socket, username, setHasChosenRoomID, setUsername, setRoomID, setHasJoinedGame}) => {
-
+const JoinGame = () => {
+    const {
+        socket,
+        username,
+        setUsername,
+        roomID,
+        setRoomID,
+        setHasJoinedGame,
+    } = useContext(GameContext);
 
     const joinRoom = () => {
         if (roomID.trim()) {
@@ -27,7 +36,7 @@ const JoinGame = ({roomID, socket, username, setHasChosenRoomID, setUsername, se
                     onChange={(e) => setRoomID(e.target.value)}
                     className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                                <button
+                <button
                     onClick={joinRoom}
                     className="w-full mt-2 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
                 >

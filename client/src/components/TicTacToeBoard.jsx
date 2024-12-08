@@ -1,22 +1,24 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { GameContext } from '../contexts/GameContext';
 
-const TicTacToeBoard = ({ socket }) => {
+const TicTacToeBoard = () => {
+    const { socket } = useContext(GameContext);
+
     const [board, setBoard] = useState(Array(9).fill(null));
     const [playerSymbol, setPlayerSymbol] = useState(undefined);
     const [playerTurn, setPlayerTurn] = useState(false);
     const [winner, setWinner] = useState(null);
 
-        // Use ref to hold the latest value of playerSymbol
-        const playerSymbolRef = useRef();
+    // Use ref to hold the latest value of playerSymbol
+    const playerSymbolRef = useRef();
 
-        // Update the ref whenever playerSymbol changes
-        useEffect(() => {
-            playerSymbolRef.current = playerSymbol;
-        }, [playerSymbol]);
+    // Update the ref whenever playerSymbol changes
+    useEffect(() => {
+        playerSymbolRef.current = playerSymbol;
+    }, [playerSymbol]);
 
     console.log(playerSymbol);
-    
 
     useEffect(() => {
         socket.on('player-state', ({ symbol, turn }) => {

@@ -1,17 +1,11 @@
-import { useState } from 'react';
-import { io } from 'socket.io-client';
+import { useContext } from 'react';
 import ChatBox from './components/ChatBox';
 import TicTacToeBoard from './components/TicTacToeBoard';
 import JoinGame from './components/JoinGame';
-
-const socket = io('http://192.168.1.3:3000');
+import  {GameContext}  from './contexts/GameContext';
 
 function App() {
-    const [username, setUsername] = useState('');
-    const [roomID, setRoomID] = useState('');
-    const [hasJoinedGame, setHasJoinedGame] = useState(false)
-
-
+    const { hasJoinedGame } = useContext(GameContext);
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
@@ -21,15 +15,11 @@ function App() {
                 </h1>
                 {hasJoinedGame ? (
                     <>
-                        <TicTacToeBoard socket={socket}/>
-                        <ChatBox
-                            username={username}
-                            roomID={roomID}
-                            socket={socket}
-                        />
+                        <TicTacToeBoard />
+                        <ChatBox />
                     </>
                 ) : (
-                    <JoinGame roomID={roomID} socket={socket} username={username} setUsername={setUsername} setRoomID={setRoomID} setHasJoinedGame={setHasJoinedGame}/>
+                    <JoinGame />
                 )}
             </div>
         </div>
