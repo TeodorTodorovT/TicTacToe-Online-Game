@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { GameContext } from '../contexts/GameContext';
 
 const TicTacToeBoard = () => {
-    const { socket } = useContext(GameContext);
+    const { socket, roomID } = useContext(GameContext);
 
     const [board, setBoard] = useState(Array(9).fill(null));
     const [playerSymbol, setPlayerSymbol] = useState(undefined);
@@ -24,10 +24,11 @@ const TicTacToeBoard = () => {
         socket.on('player-state', ({ symbol, turn }) => {
             setPlayerSymbol(symbol);
             setPlayerTurn(turn);
+            setBoard(Array(9).fill(null))
+            setWinner(null)
         });
 
         socket.on('player-move', ({ updatedBoard, result, nextTurn }) => {
-            console.log(`${nextTurn} - ${playerSymbolRef.current}`);
 
             setBoard(updatedBoard);
             if (result !== null) {
@@ -49,14 +50,22 @@ const TicTacToeBoard = () => {
             socket.emit('player-move', { board, index, playerSymbol });
         }
     };
+
+    const handleNewGame = () => {
+        socket.emit('new-game', { roomID });
+    };
     return (
         <>
             {winner !== null ? (
-                winner === playerSymbol ? (
-                    <div className="font-bold">You won</div>
-                ) : (
-                    <div className="font-bold">You Lost</div>
-                )
+                <>
+                    
+                    {winner === playerSymbol ? (
+                        <div className="font-bold">You won!</div>
+                    ) : (
+                        <div className="font-bold">You Lost!</div>
+                    )}
+                    <button onClick={handleNewGame}>Play again?</button>
+                </>
             ) : null}
             <div className="grid grid-cols-3 gap-2 w-48 disabled">
                 {board.map((cell, index) => (

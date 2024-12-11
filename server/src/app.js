@@ -59,7 +59,6 @@ io.on('connection', (socket) => {
             const updatedBoard = [...board];
             updatedBoard[index] = playerSymbol;
             const result = isWinner(updatedBoard);
-            console.log(symbol);
 
             const nextTurn = playerSymbol === 'X' ? 'O' : 'X';
 
@@ -68,6 +67,32 @@ io.on('connection', (socket) => {
                 result,
                 nextTurn,
             });
+        });
+
+
+        socket.on('new-game', ({ roomID }) => {
+            const room = io.sockets.adapter.rooms.get(roomID);
+        
+            if (room) {
+                const players = Array.from(room); // Get all socket IDs in the room
+        
+                // Toggle symbols and turns
+                const player1 = players[0]; // Assume the first player is already 'X'
+                const player2 = players[1]; // Assume the second player is already 'O'
+        
+                const player1NewSymbol = 'O';
+                const player2NewSymbol = 'X';
+                const player1Turn = false;
+                const player2Turn = true;
+        
+                // Notify both players with updated symbols and turns
+                io.to(player1).emit('player-state', { symbol: player1NewSymbol, turn: player1Turn });
+                io.to(player2).emit('player-state', { symbol: player2NewSymbol, turn: player2Turn });
+        
+                console.log(`Started new game in room ${roomID}.`);
+            } else {
+                console.log(`Room ${roomID} does not exist or is empty.`);
+            }
         });
     });
 
@@ -85,5 +110,5 @@ io.on('connection', (socket) => {
 });
 
 server.listen(3000, '0.0.0.0', () => {
-    console.log('Server running on http://192.168.1.3:3000');
+    console.log('Server running on http://localhost:3000');
 });
