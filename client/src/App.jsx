@@ -8,9 +8,9 @@ function App() {
     const { hasJoinedGame } = useContext(GameContext);
 
     return (
-        <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
-            <div className="bg-white shadow-lg rounded-lg w-full max-w-md p-6">
-                <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
+        <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
+            <div className="bg-gray-700 shadow-lg rounded-lg w-full max-w-md p-6">
+                <h1 className="text-7xl font-bold text-center mb-6 text-green-600 animate-pulse">
                     Tic-Tac-Toe
                 </h1>
                 {hasJoinedGame ? (

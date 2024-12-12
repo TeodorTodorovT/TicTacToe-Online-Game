@@ -27,18 +27,18 @@ const JoinGame = () => {
                     placeholder="Choose a name..."
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 bg-gray-500 focus:scale-y-110 focus:scale-x-105 transition-all duration-400 ease-linear"
                 />
                 <input
                     type="text"
                     placeholder="Room ID"
                     value={roomID}
                     onChange={(e) => setRoomID(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 bg-gray-500 focus:scale-y-110 focus:scale-x-105 transition-all duration-400 ease-linear"
                 />
                 <button
                     onClick={joinRoom}
-                    className="w-full mt-2 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
+                    className="w-full mt-2 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-all duration-400 ease-linear hover:scale-y-110 hover:scale-x-105"
                 >
                     Join/Create Room
                 </button>
