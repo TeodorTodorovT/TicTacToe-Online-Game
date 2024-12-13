@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useContext } from 'react';
 import { GameContext } from '../contexts/GameContext';
 
@@ -20,7 +19,9 @@ const JoinGame = () => {
     };
 
     return (
-        <>
+        <>                <h1 className="text-7xl font-bold text-center mb-6 text-green-600 animate-pulse">
+        Tic-Tac-Toe
+    </h1>
             <div className="flex flex-col gap-2">
                 <input
                     type="text"

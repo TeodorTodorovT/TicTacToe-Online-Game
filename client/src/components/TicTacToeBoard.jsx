@@ -56,6 +56,9 @@ const TicTacToeBoard = () => {
     };
     return (
         <>
+                        <h1 className="text-7xl font-bold text-center mb-6 text-green-600">
+                    Tic-Tac-Toe
+                </h1>
             {winner !== null ? (
                 <>
                     
