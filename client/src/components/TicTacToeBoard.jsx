@@ -18,18 +18,15 @@ const TicTacToeBoard = () => {
         playerSymbolRef.current = playerSymbol;
     }, [playerSymbol]);
 
-    console.log(playerSymbol);
-
     useEffect(() => {
         socket.on('player-state', ({ symbol, turn }) => {
             setPlayerSymbol(symbol);
             setPlayerTurn(turn);
-            setBoard(Array(9).fill(null))
-            setWinner(null)
+            setBoard(Array(9).fill(null));
+            setWinner(null);
         });
 
         socket.on('player-move', ({ updatedBoard, result, nextTurn }) => {
-
             setBoard(updatedBoard);
             if (result !== null) {
                 setWinner(result);
@@ -55,33 +52,29 @@ const TicTacToeBoard = () => {
         socket.emit('new-game', { roomID });
     };
     return (
-        <>
-                        <h1 className="text-7xl font-bold text-center mb-6 text-green-600">
-                    Tic-Tac-Toe
-                </h1>
+        <div>
             {winner !== null ? (
-                <>
-                    
+                <div className='flex flex-col'>
                     {winner === playerSymbol ? (
-                        <div className="font-bold">You won!</div>
+                        <div className="font-bold text-3xl text-green-600 text-center">You won!</div>
                     ) : (
-                        <div className="font-bold">You Lost!</div>
+                        <div className="font-bold text-3xl text-red-600 text-center">You Lost!</div>
                     )}
-                    <button onClick={handleNewGame}>Play again?</button>
-                </>
+                    <button onClick={handleNewGame} className='text-gray-100'>Play again?</button>
+                </div>
             ) : null}
-            <div className="grid grid-cols-3 gap-2 w-48 disabled">
+            <div className="grid grid-cols-3 disabled">
                 {board.map((cell, index) => (
                     <div
                         key={index}
                         onClick={() => handleCellClick(index)}
-                        className="w-16 h-16 bg-gray-200 border-2 border-gray-400 flex items-center justify-center text-2xl font-bold cursor-pointer"
+                        className="w-24 h-24 bg-gray-200 border-2 border-gray-400 flex items-center justify-center text-6xl font-bold cursor-pointer"
                     >
                         {cell}
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 
