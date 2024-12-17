@@ -5,7 +5,7 @@ import JoinGame from './components/JoinGame';
 import { GameContext } from './contexts/GameContext';
 
 function App() {
-    const { hasJoinedGame, username, roomID } = useContext(GameContext);
+    const { hasJoinedGame, username, roomID, symbol } = useContext(GameContext);
 
     return (
         <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
@@ -22,8 +22,11 @@ function App() {
                             <p>
                                 Room: <span className='font-bold text-lg'>{roomID}</span>
                             </p>
+                            <p>
+                                Symbol: <span className='font-bold text-lg'>{symbol}</span>
+                            </p>
                         </div>
-                        <div className="flex flex-col lg:flex-row gap-3">
+                        <div className="flex flex-col lg:flex-row gap-3 items-center">
                         <TicTacToeBoard />
                         <ChatBox />
                         </div>

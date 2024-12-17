@@ -9,7 +9,8 @@ const GameProvider = ({ children }) => {
     const [username, setUsername] = useState('');
     const [roomID, setRoomID] = useState('');
     const [hasJoinedGame, setHasJoinedGame] = useState(false);
-
+    const [symbol, setSymbol] = useState('');
+ 
     return (
         <GameContext.Provider
             value={{
@@ -20,6 +21,8 @@ const GameProvider = ({ children }) => {
                 hasJoinedGame,
                 setHasJoinedGame,
                 socket,
+                symbol,
+                setSymbol
             }}
         >
             {children}
