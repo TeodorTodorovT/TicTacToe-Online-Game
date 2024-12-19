@@ -6,9 +6,9 @@ An interactive online Tic Tac Toe game built using **React**, **Express**, and *
 
 Check out the game in action:
 
-<video src="https://github.com/TeodorTodorovT/TicTacToe-Online-Game/blob/main/videos/game-preview.mp4" controls width="600">
-Your browser does not support the video tag.
-</video>
+https://github.com/user-attachments/assets/92aca1ed-874a-4418-97b0-d21d0e5e2d93
+
+
 
 ## Features
 
