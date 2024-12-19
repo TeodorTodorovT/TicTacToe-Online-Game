@@ -2,6 +2,14 @@
 
 An interactive online Tic Tac Toe game built using **React**, **Express**, and **Socket.io**. This project allows two players to connect and play Tic Tac Toe in real-time.
 
+## Game Preview
+
+Check out the game in action:
+
+<video src="https://github.com/TeodorTodorovT/TicTacToe-Online-Game/blob/main/videos/game-preview.mp4" controls width="600">
+Your browser does not support the video tag.
+</video>
+
 ## Features
 
 - **Real-Time Multiplayer:** Play against another player online with instant updates using Socket.io.
@@ -68,6 +76,7 @@ An interactive online Tic Tac Toe game built using **React**, **Express**, and *
 
 5. Open your browser and navigate to the appropriate address to start playing.
 
+
 ## Usage
 
 1. Open the game in your browser.
@@ -79,4 +88,6 @@ An interactive online Tic Tac Toe game built using **React**, **Express**, and *
 Contributions are welcome! Please open an issue or create a pull request if you have suggestions or improvements.
 
 ---
+
+Enjoy playing Tic Tac Toe online!
 
